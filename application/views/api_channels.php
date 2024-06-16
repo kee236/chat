@@ -171,6 +171,115 @@
       </div>
     <?php endif; ?>
 
+
+///**** AI 
+
+
+<?php 
+$user_type = $this->session->userdata('user_type');
+$license_type = $this->session->userdata('license_type');
+?>
+
+<section class="section section_custom">
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="make-nav-stick">
+          <div class="list-group d-block" id="list-tab">
+            </div>
+        </div>
+      </div>
+    </div><br>
+
+    <div class="row mt-3" id="list-ai-models">
+      <div class="col-12">
+        <h2 class="section-title">AI Models</h2>
+        <p class="section-lead text-muted">
+          Integrate and configure various AI models for your chatbot.
+        </p>
+      </div>
+
+      <?php foreach($ai_models as $model): ?>
+        <div class="col-4 col-lg-2">
+          <a href="<?php echo $model['settings_url']; ?>" class="text-dark action_tag">
+            <div class="wizard-steps mb-3">
+              <div class="wizard-step mx-1 my-0">
+                <div class="wizard-step-icon">
+                  <img class="img-fluid" width="80" src="<?php echo $model['img_path']; ?>" alt="">
+                </div>
+                <div class="wizard-step-label"><?php echo $model['name']; ?></div>
+              </div>
+            </div>
+          </a>
+        </div>
+      <?php endforeach; ?>
+
+      <div class="col-4 col-lg-2">
+        <a href="<?php echo base_url('chatbot_settings/gemini_settings'); ?>" class="text-dark action_tag">
+          <div class="wizard-steps mb-3">
+            <div class="wizard-step mx-1 my-0">
+              <div class="wizard-step-icon">
+                <img class="img-fluid" width="80" src="<?php echo base_url('assets/img/gemini_logo.png'); ?>" alt="Gemini">
+              </div>
+              <div class="wizard-step-label">Gemini</div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-4 col-lg-2">
+        <a href="<?php echo base_url('chatbot_settings/chatgpt_settings'); ?>" class="text-dark action_tag">
+          <div class="wizard-steps mb-3">
+            <div class="wizard-step mx-1 my-0">
+              <div class="wizard-step-icon">
+                <img class="img-fluid" width="80" src="<?php echo base_url('assets/img/chatgpt_logo.png'); ?>" alt="ChatGPT">
+              </div>
+              <div class="wizard-step-label">ChatGPT</div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-4 col-lg-2">
+        <a href="<?php echo base_url('chatbot_settings/claude_settings'); ?>" class="text-dark action_tag">
+          <div class="wizard-steps mb-3">
+            <div class="wizard-step mx-1 my-0">
+              <div class="wizard-step-icon">
+                <img class="img-fluid" width="80" src="<?php echo base_url('assets/img/claude_logo.png'); ?>" alt="Claude">
+              </div>
+              <div class="wizard-step-label">Claude</div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      </div>
+  </div>
+</section>
+
+
+
+*****/////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <?php if($has_sms_access) { ?>
     <div class="row mt-3" id="list-sms-list">
       <div class="col-12">
