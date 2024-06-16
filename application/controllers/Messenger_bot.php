@@ -805,7 +805,59 @@ class Messenger_bot extends Home
         }
         return $final_result;
 }
+////// bot dialogflow////
 
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Messenger_bot extends CI_Controller {
+
+    public function __construct() {
+        parent::__construct();
+        $this->load->model('Dialogflow_model');
+        $this->load->library('session');
+    }
+
+    public function settings() {
+        $data['title'] = 'API and Bot Settings';
+        $data['api_keys'] = $this->Dialogflow_model->get_api_keys(); // Load API keys from database
+        $this->load->view('templates/header', $data);
+        $this->load->view('messenger_bot/settings', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function save_api_keys() {
+        $this->form_validation->set_rules('dialogflow_api_key', 'Dialogflow API Key', 'required');
+        $this->form_validation->set_rules('gimini_api_key', 'Gimini API Key', 'required');
+        $this->form_validation->set_rules('cliad_api_key', 'Cliad API Key', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->session->set_flashdata('error', validation_errors());
+            redirect('messenger_bot/settings');
+        } else {
+            $api_keys = array(
+                'dialogflow' => $this->input->post('dialogflow_api_key'),
+                'gimini' => $this->input->post('gimini_api_key'),
+                'cliad' => $this->input->post('cliad_api_key')
+            );
+            $this->Dialogflow_model->save_api_keys($api_keys);
+            $this->session->set_flashdata('success', 'API keys saved successfully.');
+            redirect('messenger_bot/settings');
+        }
+    }
+
+    public function test_dialogflow_query() {
+        $query = $this->input->post('query', true);
+        if (!empty($query)) {
+            $responseText = $this->dialogflow_lib->detect_intent_texts($query);
+            echo json_encode(['status' => 'success', 'fulfillmentText' => $responseText]);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Query cannot be empty']);
+        }
+    }
+}
+
+
+	//// End dialogflow setting////
 
 
     //$refference_id is passed for Checkbox plugin only 
