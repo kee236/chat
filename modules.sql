@@ -1,0 +1,91 @@
+
+CREATE TABLE `modules` (
+  `id` int(11) NOT NULL,
+  `module_name` varchar(250) DEFAULT NULL,
+  `add_ons_id` int(11) NOT NULL,
+  `extra_text` varchar(50) NOT NULL DEFAULT 'month',
+  `limit_enabled` enum('0','1') NOT NULL DEFAULT '1',
+  `bulk_limit_enabled` enum('0','1') NOT NULL DEFAULT '0',
+  `deleted` enum('0','1') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+
+--
+-- Dumping data for table `modules`
+--
+
+INSERT INTO `modules` (`id`, `module_name`, `add_ons_id`, `extra_text`, `limit_enabled`, `bulk_limit_enabled`, `deleted`) VALUES
+(33, 'Social Poster - Account Import : Youtube', 0, '', '1', '0', '0'),
+(65, 'Facebook Accounts', 15, '', '1', '0', '0'),
+(66, 'Facebook Pages - Subscribers/Page', 17, '', '1', '0', '0'),
+(78, 'Subscriber Manager : Background Lead Scan', 0, '', '0', '0', '0'),
+(79, 'Conversation Promo Broadcast Send', 0, 'month', '1', '1', '0'),
+(80, 'Comment Automation : Auto Reply Posts', 0, 'month', '1', '0', '0'),
+(82, 'Inbox Conversation Manager', 0, '', '0', '0', '0'),
+(88, 'Comment Reply Enhancers : Comment Hide/Delete and Reply with multimedia content', 33, '0', '0', '', ''),
+
+
+
+
+(100, 'Social Poster - Access', 0, '', '0', '0', '0'),
+(101, 'Social Poster - Account Import : Pinterest', 0, '', '1', '0', '0'),
+(102, 'Social Poster - Account Import : Twitter', 0, '', '1', '0', '0'),
+(103, 'Social Poster - Account Import :  Linkedin', 0, '', '1', '0', '0'),
+(105, 'Social Poster - Account Import : Reddit', 0, '', '1', '0', '0'),
+(107, 'Social Poster - Account Import : Blogger', 0, '', '1', '0', '0'),
+(108, 'Social Poster - Account Import :  WordPress', 0, '', '1', '0', '0'),
+(109, 'Social Poster - Account Import :  WordPress (Self hosted) ', 0, '', '1', '0', '0'),
+
+(110, 'Social Poster - Text Post', 0, 'month', '1', '1', '0'),
+(111, 'Social Poster - Image Post', 0, 'month', '1', '1', '0'),
+(112, 'Social Poster - Video Post', 0, 'month', '1', '1', '0'),
+(113, 'Social Poster - Link Post', 0, 'month', '1', '1', '0'),
+(114, 'Social Poster - HTML Post', 0, 'month', '1', '1', '0'),
+(197, 'Messenger Bot - Persistent Menu', 0, '', '0', '0', '0'),
+(198, 'Messenger Bot - Persistent Menu : Copyright Enabled', 0, '', '0', '0', '0'),
+(199, 'Messenger Bot', 0, '', '0', '0', '0'),
+(200, 'Facebook Pages', 16, '', '1', '0', '0'),
+(201, 'Comment Reply Enhancers : Comment & Bulk Tag Campaign', 33, '0', '0', '', ''),
+(202, 'Comment Reply Enhancers : Bulk Comment Reply Campaign', 33, '0', '0', '', ''),
+(204, 'Comment Reply Enhancers : Full Page Auto Reply', 33, '0', '0', '', ''),
+(206, 'Comment Reply Enhancers : Full Page Auto Like/Share', 33, '0', '0', '', ''),
+(211, 'Messenger Bot - Enhancers : Broadcast : Subscriber Bulk Message Send', 29, '1', '0', '', ''),
+(213, 'Messenger Bot - Enhancers : Engagement : Checkbox Plugin', 29, '0', '0', '', ''),
+(214, 'Messenger Bot - Enhancers : Engagement : Send to Messenger', 29, '0', '0', '', ''),
+(215, 'Messenger Bot - Enhancers : Engagement : m.me Links', 29, '0', '0', '', ''),
+(217, 'Messenger Bot - Enhancers : Engagement : Customer Chat Plugin', 29, '0', '0', '', ''),
+(218, 'Messenger Bot - Enhancers : Sequence Messaging : Message Send', 29, '0', '0', '', ''),
+(219, 'Messenger Bot - Enhancers : Sequence Messaging Campaign', 29, '0', '0', '', ''),
+(220, 'Comboposter', 38, '', '1', '0', '0'),
+(222, 'Facebook Posting : Carousel/Slider Post', 19, 'month', '1', '0', '0'),
+(223, 'Facebook Posting :  Text/Image/Link/Video Post', 18, 'month', '1', '0', '0'),
+
+
+(251, 'Comment Automation : Auto Comment Campaign', 0, '', '1', '0', '0'),
+(256, 'RSS Auto Posting', 0, '', '1', '0', '0'),
+(257, 'Messenger Bot : Export, Import & Tree View', 0, '', '1', '', '0'),
+(258, 'Messenger Bot - Connectivity : JSON API', 27, '', '1', '0', '0'),
+(261, 'Messenger Bot - Connectivity : Webview Builder', 27, '', '1', '0', '0'),
+(263, 'Email Broadcast - Email Send', 14, 'month', '1', '0', '0'),
+(264, 'SMS Broadcast - SMS Send', 0, 'month', '1', '0', '0'),
+(265, 'Messenger Bot - Email Auto Responder', 0, '', '1', '0', '0'),
+(266, 'WooCommerce Abandoned Cart Recovery', 35, '', '1', '0', '0'),
+(267, 'Utility Search Tools', 0, 'month', '1', '0', '0'),
+(268, 'Messenger E-commerce', 0, '', '1', '0', '0'),
+(270, 'SMS Broadcast - Sequence Campaign', 31, 'month', '1', '0', '0'),
+(271, 'Email Broadcast - Sequence Campaign', 31, 'month', '1', '0', '0'),
+(275, 'One Time Notification Send', 0, 'month', '1', '0', '0'),
+(277, 'Social Poster - Account Import :  Medium', 0, '', '1', '0', '0'),
+(279, 'Instagram Auto Comment Reply Enable Post', 0, 'month', '1', '0', '0'),
+(281, 'E-commerce Product Price Variation', 7, '0', '0', '0', '0'),
+(292, 'User Input Flow Campaign', 28, 'month', '1', '0', '0'),
+(293, 'WooCommerce Integration', 37, '0', '1', '0', '0'),
+(296, 'Instagram Posting : Image/Video Post', 0, 'month', '1', '1', '0'),
+(300, 'Google My Business: Account Import', 25, '0', '0', '', ''),
+(301, 'Google My Business: Answer To Questions', 25, '0', '', '', ''),
+(302, 'Google My Business: Reply To Reviews', 25, '0', '', '', ''),
+(303, 'Google My Business: Post To Locations', 25, '0', '0', '', ''),
+(304, 'Google My Business: Media Upload To Locations', 25, '0', '0', '', ''),
+(305, 'Google My Business: RSS Auto Posting', 25, '0', '0', '', ''),
+(310, 'Whatsapp Send Order', 4, '', '0', '0', '0'),
+(315, 'Visual flow builder access', 2, '', '0', '0', '0'),
+(316, 'E-commerce Digital Product', 32, '0', '0', '', ''),
