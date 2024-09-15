@@ -520,6 +520,104 @@ class Social_apps extends Home
 
 
 
+// ... (ส่วนอื่นๆ ของโค้ดใน Controller)
+
+public function ai_settings()
+{
+    // ตรวจสอบสิทธิ์การเข้าถึง (ถ้าจำเป็น)
+
+    $data['page_title'] = $this->lang->line('AI Settings');
+    $data['title'] = $this->lang->line('AI Settings');
+    $data['body'] = 'admin/social_apps/ai_settings'; 
+
+    $this->_viewcontroller($data);
+}
+
+public function add_ai_model()
+{
+    // ตรวจสอบสิทธิ์การเข้าถึง (ถ้าจำเป็น)
+
+    $data['page_title'] = $this->lang->line('Add AI Model');
+    $data['title'] = $this->lang->line('Add AI Model');
+    $data['body'] = 'admin/social_apps/ai_model_form'; 
+
+    $this->_viewcontroller($data);
+}
+
+public function edit_ai_model($id = 0)
+{
+    // ตรวจสอบสิทธิ์การเข้าถึง (ถ้าจำเป็น)
+
+    if ($id == 0) {
+        redirect('social_apps/ai_settings', 'refresh');
+    }
+
+    $data['page_title'] = $this->lang->line('Edit AI Model');
+    $data['title'] = $this->lang->line('Edit AI Model');
+    $data['body'] = 'admin/social_apps/ai_model_form'; 
+
+    $data['ai_model'] = $this->basic->get_data('ai_models', array('where' => array('id' => $id, 'user_id' => $this->user_id)));
+    if (empty($data['ai_model'])) {
+        redirect('social_apps/ai_settings', 'refresh');
+    }
+
+    $this->_viewcontroller($data);
+}
+
+public function ai_model_update_action()
+{
+    // ตรวจสอบสิทธิ์การเข้าถึง (ถ้าจำเป็น)
+
+    if (!isset($_POST)) exit;
+
+    $this->form_validation->set_rules('model_name', $this->lang->line("Model Name"), 'trim|required');
+    $this->form_validation->set_rules('provider', $this->lang->line("AI Provider"), 'trim|required');
+    $this->form_validation->set_rules('api_key', $this->lang->line("API Key"), 'trim|required');
+
+    if ($this->form_validation->run() == FALSE) {
+        if ($this->input->post('table_id')) {
+            $this->edit_ai_model($this->input->post('table_id'));
+        } else {
+            $this->add_ai_model();
+        }
+    } else {
+
+        $this->csrf_token_check();
+
+        $insert_data['model_name'] = $this->input->post('model_name', true);
+        $insert_data['provider'] = $this->input->post('provider', true);
+        $insert_data['api_key'] = $this->input->post('api_key', true);
+        // ... (ข้อมูลอื่นๆ ของโมเดล AI)
+
+        if ($insert_data['provider'] == 'Line') {
+            $insert_data['line_channel_id'] = $this->input->post('line_channel_id', true);
+            $insert_data['line_channel_secret'] = $this->input->post('line_channel_secret', true);
+            $insert_data['line_channel_access_token'] = $this->input->post('line_channel_access_token', true);
+        } else if ($insert_data['provider'] == 'Line Notify') {
+            $insert_data['line_notify_token'] = $this->input->post('line_notify_token', true);
+        }
+
+        $status = $this->input->post('status');
+        if($status=='') $status='0';
+        $insert_data['status'] = $status;
+
+        $table_id = $this->input->post('table_id');
+
+        if ($table_id == 0) {
+            $insert_data['created_at'] = date('Y-m-d H:i:s');
+            $this->basic->insert_data('ai_models', $insert_data);
+            $this->session->set_flashdata('success_message', $this->lang->line("AI Model has been added successfully."));
+        } else {
+            $this->basic->update_data('ai_models', array('id' => $table_id), $insert_data);
+            $this->session->set_flashdata('success_message', $this->lang->line("AI Model has been updated successfully."));
+        }
+
+        redirect(base_url('social_apps/ai_settings'), 'location');
+    }
+}
+
+// ... (ส่วนอื่นๆ ของโค้ดใน Controller)
+
     /**
      * Twitter section starts
      */
