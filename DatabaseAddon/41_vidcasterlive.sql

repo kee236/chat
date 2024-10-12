@@ -1,0 +1,55 @@
+41_vidcasterlive
+
+-- Create add_on
+INSERT INTO `add_ons` (`id`, `add_on_name`, `unique_name`, `version`, `installed_at`, `update_at`, `purchase_code`, `module_folder_name`, `project_id`) VALUES (34, 'VidCasterLive', 'vidcasterlive', '1.0', NULL, NULL, '', 'vidcasterlive', 41);
+
+-- Create module
+INSERT INTO `modules` (`id`, `module_name`, `add_ons_id`, `extra_text`, `limit_enabled`, `bulk_limit_enabled`, `deleted`) VALUES (252, 'Facebook Live Streaming - Campaigns', 34, 'month', '1', '0', '0');
+INSERT INTO `modules` (`id`, `module_name`, `add_ons_id`, `extra_text`, `limit_enabled`, `bulk_limit_enabled`, `deleted`) VALUES (254, 'Facebook Live Streaming - Crossposting/Auto Share/Comment', 34, '', '1', '0', '0');
+
+-- Create table for live stream scheduler
+CREATE TABLE IF NOT EXISTS `vidcaster_facebook_rx_live_scheduler` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `facebook_rx_fb_user_info_id` int(11) NOT NULL,
+  `scheduler_name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `page_group_user_id` int(11) NOT NULL,
+  `page_or_group_or_user` enum('page','group','user') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `page_or_group_or_user_name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_url` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `use_system_video` enum('yes','no') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'yes',
+  `share_or_cross` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `crosspost_enable_disable` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `crosspost_this_post_by_pages` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `auto_share_post` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `auto_share_this_post_by_pages` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `auto_share_to_profile` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `auto_like_post` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `auto_private_reply` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `auto_private_reply_text` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `auto_private_reply_status` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0' COMMENT 'taken by cronjob or not',
+  `auto_private_reply_count` int(11) NOT NULL,
+  `auto_private_reply_done_ids` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `auto_comment` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `auto_comment_text` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `posting_status` enum('0','1','2') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '2',
+  `post_id` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fb post id',
+  `post_url` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stream_url` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `scheduled_video_url` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `secure_stream_url` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `create_event` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
+  `schedule_type` enum('now','later') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'later',
+  `schedule_time` datetime NOT NULL,
+  `time_zone` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_updated_at` datetime NOT NULL,
+  `is_live` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `stream_started` datetime NOT NULL,
+  `stream_completed` datetime NOT NULL,
+  `video_width` int(11) NOT NULL DEFAULT '1280',
+  `video_height` int(11) NOT NULL DEFAULT '720',
+  `ffmpeg_log` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`,`facebook_rx_fb_user_info_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
