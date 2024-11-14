@@ -1,5 +1,5 @@
 -- Create add_on
-INSERT INTO `add_ons` (`id`, `add_on_name`, `unique_name`, `version`, `installed_at`, `update_at`, `purchase_code`, `module_folder_name`, `project_id`) VALUES (28, 'User Input & Custom Fields', 'custom_field_manager', '2.0.1', NULL, NULL, '', 'custom_field_manager', 49);
+INSERT INTO `add_ons` (`id`, `add_on_name`, `unique_name`, `version`, `installed_at`, `update_at`, `purchase_code`, `module_folder_name`, `project_id`) VALUES (28, 'User Input & Custom Fields', 'custom_field_manager', '2.0.1', '', '', '', 'custom_field_manager', 49);
 
 -- Create module
 INSERT INTO `modules` (`id`, `module_name`, `add_ons_id`, `extra_text`, `limit_enabled`, `bulk_limit_enabled`, `deleted`) VALUES (292, 'User Input Flow Campaign', 28, 'month', '1', '0', '0');
