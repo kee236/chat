@@ -53,6 +53,15 @@ class Comboposter extends Home
         $this->load->library('Twitter');
         // $this->load->library('Tumblr');
         $this->load->library('Linkedin');
+
+
+$this->load->library('Line');
+        $this->load->library('Tiktok');
+        $this->load->library('Whatapp', NULL, 'whatapp');
+
+
+
+
         $this->load->library('Medium');
         $this->load->library('Pinterests', NULL, 'pinterest');
         $this->load->library('Reddit');
@@ -66,6 +75,18 @@ class Comboposter extends Home
         $data['youtube_login_button'] = $this->google->youtube_login_button($redirect_url. '/youtube');
         $data['blogger_login_button'] = $this->google->blogger_login_button($redirect_url. '/blogger');
         $data['twitter_login_button'] = $this->twitter->login_button($redirect_url. '/twitter');
+
+$data['line_login_button'] = $this->line->login_button($redirect_url. '/line');
+        // $data['tiktok_login_button'] = $this->tiktok->login_button($redirect_url. '/tiktok');
+        $data['whatapp_login_button'] = $this->whatapp->login_button($redirect_url. '/whatapp');
+
+
+
+
+
+
+
+
         // $data['tumblr_login_button'] = $this->tumblr->login_button($redirect_url. '/tumblr');
         $data['linkedin_login_button'] = $this->linkedin->login_button($redirect_url. '/linkedin');
         // $data['medium_login_button'] = $this->medium->login_button($redirect_url. '/medium');
@@ -81,6 +102,14 @@ class Comboposter extends Home
         $data['twitter_account_list'] = $this->basic->get_data('twitter_users_info', array('where' => array('user_id' => $this->user_id)));
         // $data['tumblr_account_list'] = $this->basic->get_data('tumblr_users_info', array('where' => array('user_id' => $this->user_id)));
         $data['linkedin_account_list'] = $this->basic->get_data('linkedin_users_info', array('where' => array('user_id' => $this->user_id)));
+
+$data['tiktok_account_list'] = $this->basic->get_data('tiktok_users_info', array('where' => array('user_id' => $this->user_id)));
+        
+ $data['whatapp_account_list'] = $this->basic->get_data('whatapp_users_info', array('where' => array('user_id' => $this->user_id)));
+
+        $data['line_account_list'] = $this->basic->get_data('line_users_info', array('where' => array('user_id' => $this->user_id)));
+
+
 
         $data['medium_account_list'] = $this->basic->get_data('medium_users_info', array('where' => array('user_id' => $this->user_id)));
 
